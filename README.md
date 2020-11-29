@@ -14,7 +14,7 @@
 - mariaDB(10.2.36) & workbench(8.0.22) 설치
 - [settingweb](./settingweb) 프로젝트에 DB 연동하여 서버로 확인
 
-  ![1주차 프로젝트 결과 이미지!](./pics/week1_projectresult.jpg "1주차 프로젝트 결과")
+  ![1주차 프로젝트 결과 이미지!](./pics/week1/projectresult.jpg "1주차 프로젝트 결과")
 
 - [과제 수행하며 나온 이슈 정리](./docs/[1week]how-to-resolve-setting-issues.md "개발 환경 구축하면서 나온 이슈들")
 
