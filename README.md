@@ -31,6 +31,8 @@
   
     ![API endpoint 명세 이미지!](./pics/week2/API_endpoint.jpg "LINE Pay 기술 연동 가이드에서 캡처")
 
+  - **ANSWER**: API 가이드는 유연하게 작성하기 때문에 Content-Type에 꼭 맞게 작성하지 않아도 된다. 결과 화면이 json이라면 Required에 사진과 같이 작성 가능하다.
+
 - Quiz
   - pathVariable
     
@@ -44,6 +46,66 @@
 
      HTML 문서와 같은 리소스들을 가져올 수 있도록 해주는 프로토콜이다. 웹에서 이루어지는 모든 데이터 교환의 기초이며, 클라이언트-서버 프로토콜이다.
 
+</br>
+</br>
+
+## 3주차 (2020.12.7 ~ 2020.12.13)
+- spring boot 환경 구축
+
+  ![스프링 부트 환경 구축 결과 이미지!](./pics/week3/spring_boot_test_result.jpg "스프링 부트 환경 구축 결과 화면")
+
+- 간단한 API 만들기 + SQL 작성
+  - spring boot 프로젝트([settingweb_boot](./settingweb_boot))에 myBatis, hikariCP(JDBC Connection Pool)로 mariaDB 연동하여 RestController API 완성
+  
+  1. 월별 접속자 수
+      - sql
+
+        ![월별 접속자 수 SQL 이미지!](./pics/week3/visitorsMonth_sql.jpg "월별 접속자 수 SQL")
+
+      - 결과 화면
+
+        ![월별 접속자 수 결과 이미지!](./pics/week3/visitorsMonth_result.jpg "월별 접속자 수 결과")
+
+  1. 일자별 접속자 수
+      - sql
+
+        ![일자별 접속자 수 SQL 이미지!](./pics/week3/visitorsDate_sql.jpg "일자별 접속자 수 SQL")
+
+      - 결과 화면
+      
+        ![일자별 접속자 수 결과 이미지!](./pics/week3/visitorsDate_result.jpg "일자별 접속자 수 결과")
+
+  1. 평균 하루 로그인 수
+      - sql
+
+        ![평균 하루 로그인 수 SQL 이미지!](./pics/week3/loginAvgDate_sql.jpg "평균 하루 로그인 수 SQL")
+
+      - 결과 화면
+
+        ![평균 하루 로그인 수 결과 이미지!](./pics/week3/loginAvgDate_result.jpg "평균 하루 로그인 수 결과")      
+
+  1. 휴일을 제외한 로그인 수
+      - sql
+
+        ![휴일을 제외한 로그인 수 SQL 이미지!](./pics/week3/loginWeekday_sql.jpg "휴일을 제외한 로그인 수 SQL")
+
+      - 결과 화면
+      
+        ![휴일을 제외한 로그인 수 결과 이미지!](./pics/week3/loginWeekday_result.jpg "휴일을 제외한 로그인 수 결과")
+
+  1. 부서별 월별 로그인 수
+      - sql
+
+        ![부서별 월별 로그인 수 SQL 이미지!](./pics/week3/loginDeptandMonth_sql.jpg "부서별 월별 로그인 수 SQL")
+
+      - 결과 화면
+
+        ![부서별 월별 로그인 수 결과 이미지!](./pics/week3/loginDeptandMonth_result.jpg "부서별 월별 로그인 수 결과")  
+
+- 참고 문서
+  - mariaDB 연동
+    - [Spring Boot DataBase 연동하기](https://goddaehee.tistory.com/205?category=367461)
+    - [spring + hikariCP datasource 설정하기](https://oingdaddy.tistory.com/13)
 
 </br>
 </br>
