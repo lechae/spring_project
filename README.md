@@ -102,6 +102,9 @@
 
         ![부서별 월별 로그인 수 결과 이미지!](./pics/week3/loginDeptandMonth_result.jpg "부서별 월별 로그인 수 결과")  
 
+- 이슈 사항
+  - [Eclipse Error: Could not initialize class](https://github.com/lechae/spring_project/issues/1)
+
 - 참고 문서
   - mariaDB 연동
     - [Spring Boot DataBase 연동하기](https://goddaehee.tistory.com/205?category=367461)
