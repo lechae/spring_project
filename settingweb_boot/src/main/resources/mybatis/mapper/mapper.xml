@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.devfun.settingweb_boot.mapper.statistcMapper"> 
+	
+	<select id="selectTest" resultType="testVo"> 
+		SELECT 'GOD' AS NAME 
+	</select>
+	
+	<select id="selectRequestInfo" resultType="requestInfoVo"> 
+		SELECT * FROM REQUESTINFO
+	</select>
+	
+	<!--  월별 접속자 수 -->
+	<select id="selectVisitorsMonth" resultType="visitorsMonthVo"> 
+		SELECT 	'0000' AS RESULTCODE
+				, #{year} AS YEAR
+				, #{month} AS MONTH
+		        , COUNT(DISTINCT USERID) AS TOTALCNT
+		FROM REQUESTINFO
+		WHERE DATE_FORMAT(CREATEDATE, '%Y') = #{year}
+		  AND DATE_FORMAT(CREATEDATE, '%m') = #{month}
+	</select>
+	
+	<!-- 일자별 접속자 수 -->
+	<select id="selectVisitorsDate" resultType="visitorsDateVo"> 
+		SELECT 	'0000' AS RESULTCODE
+				, #{year} AS YEAR
+				, #{month} AS MONTH
+				, #{date} AS DATE
+		        , COUNT(DISTINCT USERID) AS TOTALCNT
+		FROM REQUESTINFO
+		WHERE DATE_FORMAT(CREATEDATE, '%Y') = #{year}
+		  AND DATE_FORMAT(CREATEDATE, '%m') = #{month}
+		  AND DATE_FORMAT(CREATEDATE, '%d') = #{date}
+	</select>
+	
+	<!-- 평균 하루 로그인 수 -->
+	<select id="selectLoginAvgDate" resultType="loginVo"> 
+		SELECT  '0000' AS RESULTCODE
+				, CAST(AVG(CNT) AS SIGNED) AS TOTALCNT
+		FROM (
+				SELECT COUNT(REQUESTID) AS CNT
+				FROM REQUESTINFO
+		        WHERE REQUESTCODE = 'L'
+				GROUP BY DATE_FORMAT(CREATEDATE, '%Y%m%d')
+			 ) AS TMP
+	</select>
+	
+	<!-- 휴일을 제외한 로그인 수 -->
+	<select id="selectLoginWeekday" resultType="loginVo"> 
+		SELECT  '0000' AS RESULTCODE
+				, COUNT(REQUESTID) AS TOTALCNT
+		FROM REQUESTINFO
+        WHERE REQUESTCODE = 'L'
+		  AND DAYOFWEEK(DATE_FORMAT(CREATEDATE, '%Y%m%d')) BETWEEN 2 AND 6
+	</select>
+	
+	<!-- 부서별 월별 로그인 수 -->
+	<select id="selectLoginDeptandMonth" resultType="loginDeptAndMonthVo"> 
+		SELECT  '0000' AS RESULTCODE
+				, COUNT(REQUESTID) AS TOTALCNT
+		        , #{dept} AS DEPARTMENT
+		        , #{year} AS YEAR
+				, #{month} AS MONTH
+		FROM REQUESTINFO, USER
+		WHERE REQUESTINFO.USERID = USER.USERID
+		  AND REQUESTCODE = 'L'
+		  AND HR_ORGAN = #{dept}
+		  AND DATE_FORMAT(CREATEDATE, '%Y') = #{year}
+		  AND DATE_FORMAT(CREATEDATE, '%m') = #{month}
+	</select>
+	 
+</mapper>
