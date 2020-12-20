@@ -123,7 +123,7 @@
     - loginDeptAndMonthVo - `resultCode`, `totalCnt`, department, `year`, `month`
   - After
     - 조회 조건과 결과로 나누어 VO 생성
-    - `@JsonInclude` annotation을 사용하여 사용하지 않은 변수는 출력하지 않음
+    - `@JsonInclude` annotation을 사용하여 필요없는 변수는 json 출력하지 않음
     - infoVo - year, month, date, department
     - resultVo - resultCode, resultString, totalCnt, avgNum, info(infoVo)
 - 에러 메세지 추가
@@ -136,8 +136,14 @@
 
     ![에러 처리 결과 이미지!](./pics/week4/chkError_result.jpg "에러 처리 결과")
 
+  - ▶ 추가 구현 필요 ◀
+
+    에러가 발생하면 Error Page(jsp로 구현할 예정)로 매핑될 수 있도록 구현
+    1. Whitelabel Error Page 사용
+    1. 커스텀 Error Page 사용
+
 - API 기능 추가
-  - 사용자 API 사용을 위해 userVo(userId, name, dept) 추가
+  - 사용자 API 사용을 위해 `userVo(userId, name, dept)` 추가
   - 사용자 정보 조회
     - sql
 
@@ -148,6 +154,8 @@
       ![사용자 정보 조회 결과 이미지!](./pics/week4/selectUserInfo_result.jpg "사용자 정보 조회 결과")  
 
   - 사용자 정보 추가
+    - 사용자 등록 페이지를 만들어 추가할 수도 있도록 구현함
+      ![사용자 정보 등록 페이지 이미지!](./pics/week4/registerView.jpg "사용자 정보 등록 페이지 SQL")
     - sql
 
       ![사용자 정보 추가 SQL 이미지!](./pics/week4/insertUserInfo_sql.jpg "사용자 정보 추가 SQL")
@@ -169,3 +177,7 @@
 
       ⬇사용자 정보가 requestInfo 테이블에 등록된 경우, 삭제할 수 없음⬇
       ![사용자 정보 삭제 이미지!](./pics/week4/deleteUserInfo_result2.jpg "사용자 정보 삭제 결과")  
+
+- API 사용 가이드 업데이트
+  - 3-4주차에 개발한 내용을 실제 사용자가 이해할 수 있도록 문서 작성
+  - 문서: [SW 활용률 API 사용 가이드](./docs/[week3-4]SW_활용률_API_사용_가이드.pdf)
