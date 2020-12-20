@@ -112,3 +112,60 @@
 
 </br>
 </br>
+
+## 4주차 (2020.12.14 ~ 2020.12.20)
+- VO 정리
+  - Before
+    - 각각의 모델 안에 중복 변수가 많음
+    - visitorsMonthVo - `resultCode`, `totalCnt`, `year`, `month`
+    - visitorsDateVo - `resultCode`, `totalCnt`, `year`, `month`, date
+    - loginVo - `resultCode`, `totalCnt`
+    - loginDeptAndMonthVo - `resultCode`, `totalCnt`, department, `year`, `month`
+  - After
+    - 조회 조건과 결과로 나누어 VO 생성
+    - `@JsonInclude` annotation을 사용하여 사용하지 않은 변수는 출력하지 않음
+    - infoVo - year, month, date, department
+    - resultVo - resultCode, resultString, totalCnt, avgNum, info(infoVo)
+- 에러 메세지 추가
+  - 필수 파라미터 정보가 없을 때, 에러 메세지 확인할 수 있도록 추가
+  - Source
+
+    ![에러 처리 IF문 이미지!](./pics/week4/chkError_process.jpg "에러 처리 IF문")
+
+  - 결과 화면
+
+    ![에러 처리 결과 이미지!](./pics/week4/chkError_result.jpg "에러 처리 결과")
+
+- API 기능 추가
+  - 사용자 API 사용을 위해 userVo(userId, name, dept) 추가
+  - 사용자 정보 조회
+    - sql
+
+      ![사용자 정보 조회 SQL 이미지!](./pics/week4/selectUserInfo_sql.jpg "사용자 정보 조회 SQL")
+
+    - 결과 화면
+
+      ![사용자 정보 조회 결과 이미지!](./pics/week4/selectUserInfo_result.jpg "사용자 정보 조회 결과")  
+
+  - 사용자 정보 추가
+    - sql
+
+      ![사용자 정보 추가 SQL 이미지!](./pics/week4/insertUserInfo_sql.jpg "사용자 정보 추가 SQL")
+
+    - 결과 화면
+
+      ![사용자 정보 추가 결과 이미지!](./pics/week4/insertUserInfo_result.jpg "사용자 정보 추가 결과")  
+
+      ![사용자 정보 추가 결과 이미지!](./pics/week4/insertUserInfo_result2.jpg "사용자 정보 추가 결과") 
+
+  - 사용자 정보 삭제
+    - sql
+
+      ![사용자 정보 삭제 SQL 이미지!](./pics/week4/deleteUserInfo_sql.jpg "사용자 정보 삭제 SQL")
+
+    - 결과 화면
+
+      ![사용자 정보 삭제 이미지!](./pics/week4/deleteUserInfo_result.jpg "사용자 정보 삭제 결과")  
+
+      ⬇사용자 정보가 requestInfo 테이블에 등록된 경우, 삭제할 수 없음⬇
+      ![사용자 정보 삭제 이미지!](./pics/week4/deleteUserInfo_result2.jpg "사용자 정보 삭제 결과")  
