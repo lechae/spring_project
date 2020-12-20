@@ -142,6 +142,8 @@
     1. Whitelabel Error Page 사용
     1. 커스텀 Error Page 사용
 
+    참고: [SpringBoot 에러 페이지 설정](https://goddaehee.tistory.com/214)
+
 - API 기능 추가
   - 사용자 API 사용을 위해 `userVo(userId, name, dept)` 추가
   - 사용자 정보 조회
@@ -175,8 +177,8 @@
 
       ![사용자 정보 삭제 이미지!](./pics/week4/deleteUserInfo_result.jpg "사용자 정보 삭제 결과")  
 
-      ⬇사용자 정보가 requestInfo 테이블에 등록된 경우, 삭제할 수 없음⬇
       ![사용자 정보 삭제 이미지!](./pics/week4/deleteUserInfo_result2.jpg "사용자 정보 삭제 결과")  
+      ⬆사용자 정보가 requestInfo 테이블에 등록된 경우, 삭제할 수 없음⬆
 
 - API 사용 가이드 업데이트
   - 3-4주차에 개발한 내용을 실제 사용자가 이해할 수 있도록 문서 작성

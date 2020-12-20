@@ -3,16 +3,23 @@
  
 <mapper namespace="com.devfun.settingweb_boot.mapper.statistcMapper"> 
 	
-	<select id="selectTest" resultType="testVo"> 
-		SELECT 'GOD' AS NAME 
-	</select>
-	
-	<select id="selectRequestInfo" resultType="requestInfoVo"> 
-		SELECT * FROM REQUESTINFO
+	<!-- 사용자 정보 -->
+	<select id="selectUserInfo" resultType="userVo"> 
+		SELECT 	USERID
+				, USERNAME AS NAME
+				, HR_ORGAN AS DEPT
+		FROM USER
 	</select>
 	
 	<!--  월별 접속자 수 -->
-	<select id="selectVisitorsMonth" resultType="visitorsMonthVo"> 
+	<select id="selectVisitorsMonth" resultType="resultVo"> 
+		SELECT 	'0000' AS RESULTCODE
+		        , COUNT(DISTINCT USERID) AS TOTALCNT
+		FROM REQUESTINFO
+		WHERE DATE_FORMAT(CREATEDATE, '%Y') = #{year}
+		  AND DATE_FORMAT(CREATEDATE, '%m') = #{month}
+	</select>
+	<!-- <select id="selectVisitorsMonth" resultType="visitorsMonthVo"> 
 		SELECT 	'0000' AS RESULTCODE
 				, #{year} AS YEAR
 				, #{month} AS MONTH
@@ -20,10 +27,18 @@
 		FROM REQUESTINFO
 		WHERE DATE_FORMAT(CREATEDATE, '%Y') = #{year}
 		  AND DATE_FORMAT(CREATEDATE, '%m') = #{month}
-	</select>
+	</select> -->
 	
 	<!-- 일자별 접속자 수 -->
-	<select id="selectVisitorsDate" resultType="visitorsDateVo"> 
+	<select id="selectVisitorsDate" resultType="resultVo"> 
+		SELECT 	'0000' AS RESULTCODE
+		        , COUNT(DISTINCT USERID) AS TOTALCNT
+		FROM REQUESTINFO
+		WHERE DATE_FORMAT(CREATEDATE, '%Y') = #{year}
+		  AND DATE_FORMAT(CREATEDATE, '%m') = #{month}
+		  AND DATE_FORMAT(CREATEDATE, '%d') = #{date}
+	</select>
+	<!-- <select id="selectVisitorsDate" resultType="visitorsDateVo"> 
 		SELECT 	'0000' AS RESULTCODE
 				, #{year} AS YEAR
 				, #{month} AS MONTH
@@ -33,12 +48,12 @@
 		WHERE DATE_FORMAT(CREATEDATE, '%Y') = #{year}
 		  AND DATE_FORMAT(CREATEDATE, '%m') = #{month}
 		  AND DATE_FORMAT(CREATEDATE, '%d') = #{date}
-	</select>
+	</select> -->
 	
 	<!-- 평균 하루 로그인 수 -->
-	<select id="selectLoginAvgDate" resultType="loginVo"> 
+	<select id="selectLoginAvgDate" resultType="resultVo"> 
 		SELECT  '0000' AS RESULTCODE
-				, CAST(AVG(CNT) AS SIGNED) AS TOTALCNT
+				, CAST(AVG(CNT) AS SIGNED) AS AVGNUM
 		FROM (
 				SELECT COUNT(REQUESTID) AS CNT
 				FROM REQUESTINFO
@@ -48,7 +63,7 @@
 	</select>
 	
 	<!-- 휴일을 제외한 로그인 수 -->
-	<select id="selectLoginWeekday" resultType="loginVo"> 
+	<select id="selectLoginWeekday" resultType="resultVo"> 
 		SELECT  '0000' AS RESULTCODE
 				, COUNT(REQUESTID) AS TOTALCNT
 		FROM REQUESTINFO
@@ -57,7 +72,17 @@
 	</select>
 	
 	<!-- 부서별 월별 로그인 수 -->
-	<select id="selectLoginDeptandMonth" resultType="loginDeptAndMonthVo"> 
+	<select id="selectLoginDeptandMonth" resultType="resultVo"> 
+		SELECT  '0000' AS RESULTCODE
+				, COUNT(REQUESTID) AS TOTALCNT
+		FROM REQUESTINFO, USER
+		WHERE REQUESTINFO.USERID = USER.USERID
+		  AND REQUESTCODE = 'L'
+		  AND HR_ORGAN = #{dept}
+		  AND DATE_FORMAT(CREATEDATE, '%Y') = #{year}
+		  AND DATE_FORMAT(CREATEDATE, '%m') = #{month}
+	</select>
+	<!-- <select id="selectLoginDeptandMonth" resultType="loginDeptAndMonthVo"> 
 		SELECT  '0000' AS RESULTCODE
 				, COUNT(REQUESTID) AS TOTALCNT
 		        , #{dept} AS DEPARTMENT
@@ -69,6 +94,17 @@
 		  AND HR_ORGAN = #{dept}
 		  AND DATE_FORMAT(CREATEDATE, '%Y') = #{year}
 		  AND DATE_FORMAT(CREATEDATE, '%m') = #{month}
-	</select>
+	</select> -->
 	 
+	<!-- 사용자 정보 삽입 -->
+	<insert id="insertUserInfo" parameterType="userVo">   
+		INSERT INTO USER(USERID, USERNAME, HR_ORGAN)
+		VALUES (#{userId}, #{name}, #{dept})
+	</insert>
+	
+	<!-- 사용자 정보 삭제 -->
+	<update id="deleteUserInfo" parameterType="userVo">
+		DELETE FROM USER
+		WHERE USERID = #{userId}
+	</update>	
 </mapper>
